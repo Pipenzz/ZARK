@@ -1,0 +1,208 @@
+/* Reseteo básico */
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
+body { background-color: #121212; color: #ffffff; }
+
+/* ================= HEADER ================= */
+.header {
+    display: flex; justify-content: center; align-items: center;
+    padding: 16px 20px; background-color: #1e1e1e;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5); position: relative;
+}
+.logo {
+    font-size: 2.2rem; font-weight: 900;
+    font-family: "Arial Black", Impact, sans-serif; 
+    letter-spacing: 2px; text-transform: uppercase;
+}
+.menu-btn {
+    font-size: 2rem; cursor: pointer;
+    position: absolute; right: 20px;
+}
+
+/* ================= CUADRÍCULA ================= */
+.contenedor-principal { padding: 20px; }
+.grid-cuadrados { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.cuadrado {
+    background-color: #1e1e1e; border-radius: 12px; text-decoration: none;
+    color: #ffffff; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; gap: 10px;
+    aspect-ratio: 1 / 1; box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    transition: transform 0.2s;
+}
+.cuadrado:active { transform: scale(0.95); background-color: #2a2a2a; }
+.cuadrado .icono { font-size: 3rem; color: #775adf; }
+.cuadrado .texto { font-size: 1rem; font-weight: 600; }
+
+@media (min-width: 768px) {
+    .contenedor-principal { max-width: 800px; margin: 0 auto; }
+    .grid-cuadrados { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .logo { font-size: 2.8rem; }
+}
+
+/* ================= PANTALLAS SECUNDARIAS ================= */
+.header-secundario { justify-content: flex-start; gap: 20px; }
+.btn-volver { color: #ffffff; text-decoration: none; font-size: 2rem; }
+.text-center {
+    text-align: center; display: flex; flex-direction: column;
+    align-items: center; gap: 30px; margin-top: 40px;
+}
+
+/* ================= LA MONEDA ================= */
+.zona-moneda { perspective: 1000px; margin: 60px 0; height: 150px; }
+.moneda-3d {
+    width: 150px; height: 150px; position: relative;
+    transform-style: preserve-3d; transition: transform 2s cubic-bezier(0.15, 0.9, 0.35, 1); 
+}
+.cara-moneda {
+    width: 100%; height: 100%; position: absolute; backface-visibility: hidden;
+    border-radius: 50%; display: flex; justify-content: center;
+    align-items: center; box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+.texto-moneda {
+    font-family: 'Arial Black', sans-serif; font-size: 2rem; color: #333;
+    text-shadow: 1px 1px 0px rgba(255,255,255,0.6);
+}
+.frente { background: radial-gradient(circle, #fcd033 40%, #b8860b 100%); border: 6px solid #daa520; }
+.dorso { transform: rotateX(180deg); background: radial-gradient(circle, #f0f0f0 40%, #a9a9a9 100%); border: 6px solid #808080; }
+.saltando { animation: saltoMoneda 2s ease-out; }
+@keyframes saltoMoneda {
+    0% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-250px) scale(1.2); }
+    100% { transform: translateY(0) scale(1); }
+}
+
+/* ================= BOTONES SECUNDARIOS ================= */
+.btn-accion {
+    background-color: #ffffff; color: #121212; border: none;
+    padding: 16px 32px; font-size: 1.2rem; font-weight: bold;
+    border-radius: 30px; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+.btn-accion:active { transform: scale(0.95); }
+
+/* NUEVO BOTÓN OUTLINE (MODERNO) */
+.btn-outline {
+    background-color: transparent;
+    color: #775adf;
+    border: 2px solid #775adf;
+    padding: 16px 32px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 30px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background-color 0.2s, transform 0.1s;
+}
+.btn-outline:active {
+    transform: scale(0.95);
+    background-color: rgba(119, 90, 223, 0.15);
+}
+
+.mensaje-estado { font-size: 1.5rem; font-weight: bold; margin-top: 10px; }
+.mt-20 { margin-top: 20px; }
+
+/* ================= FORMULARIO RULETA Y LISTA ================= */
+.panel-agregar-rapido {
+    display: flex; justify-content: center; align-items: center; gap: 10px;
+    width: 100%; max-width: 320px; margin: 0 auto 20px auto;
+}
+.input-form-grande {
+    flex-grow: 1; padding: 15px; border: none; border-radius: 8px;
+    font-size: 1.1rem; outline: none; text-align: center;
+    background-color: #2a2a2a; color: #ffffff;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.5); 
+}
+.input-form-grande::placeholder { color: #888888; }
+.btn-limpiar {
+    background-color: #e74c3c; color: white; border: none;
+    border-radius: 8px; padding: 12px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3); transition: transform 0.1s;
+}
+.btn-limpiar:active { transform: scale(0.9); }
+.lista-nombres {
+    list-style: none; margin-top: 10px; display: flex;
+    flex-wrap: wrap; gap: 10px; justify-content: center;
+}
+.lista-nombres li {
+    background-color: #2a2a2a; padding: 8px 15px;
+    border-radius: 20px; font-size: 0.9rem; border-left: 5px solid; 
+    cursor: pointer; transition: opacity 0.2s;
+}
+.lista-nombres li:active { opacity: 0.5; }
+.texto-ayuda { font-size: 0.85rem; color: #888888; margin-top: 15px; }
+
+/* ================= LA RULETA VISUAL ================= */
+.contenedor-ruleta { position: relative; width: 300px; height: 300px; margin: 20px auto; }
+#ruleta-canvas {
+    width: 100%; height: 100%; border-radius: 50%;
+    transition: transform 4s cubic-bezier(0.15, 0.9, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.6); border: 4px solid #333;
+}
+.puntero {
+    position: absolute; top: -15px; left: 50%; transform: translateX(-50%); 
+    width: 0; height: 0; border-left: 15px solid transparent;
+    border-right: 15px solid transparent; border-top: 30px solid #e74c3c;
+    z-index: 10; filter: drop-shadow(0 3px 3px rgba(0,0,0,0.5));
+}
+
+/* ================= SLIDER Y GASTOS (NUEVO) ================= */
+.slider-ventana {
+    width: 100%; overflow: hidden; position: relative; padding-top: 20px;
+}
+.slider-contenedor {
+    display: flex; width: 200%; 
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); 
+}
+.slider-panel {
+    width: 50%; display: flex; flex-direction: column;
+    align-items: center; padding: 0 20px;
+}
+.mostrar-resultados { transform: translateX(-50%); }
+
+.lista-gastos {
+    list-style: none; width: 100%; max-width: 400px;
+    display: flex; flex-direction: column; gap: 15px; margin-bottom: 20px;
+}
+.gasto-item {
+    background-color: #1e1e1e; border-radius: 12px; padding: 15px;
+    display: flex; justify-content: space-between; align-items: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+.gasto-nombre { font-size: 1.1rem; font-weight: bold; color: #ffffff; }
+.gasto-input-container {
+    display: flex; align-items: center; background-color: #2a2a2a;
+    border-radius: 8px; padding: 5px 10px;
+}
+.gasto-simbolo { color: #4CAF50; font-weight: bold; margin-right: 5px; }
+
+/* Ampliado un poco para que entren más dígitos */
+.input-plata {
+    background: none; border: none; color: white;
+    font-size: 1.1rem; width: 100px; outline: none;
+    text-align: right; font-family: monospace;
+}
+.input-plata::placeholder { color: #888888; }
+
+.btn-eliminar {
+    background: none; border: none; color: #e74c3c;
+    cursor: pointer; margin-left: 10px; display: flex;
+    align-items: center; justify-content: center;
+}
+
+.titulo-resultados { margin-bottom: 20px; color: #775adf; }
+.resumen-total {
+    background-color: #1e1e1e; padding: 15px 30px; border-radius: 12px;
+    text-align: center; margin-bottom: 20px; font-size: 1.1rem;
+    border: 2px solid #333;
+}
+.lista-resultados {
+    list-style: none; width: 100%; max-width: 400px;
+    display: flex; flex-direction: column; gap: 10px;
+}
+.resultado-item {
+    background-color: #2a2a2a; padding: 15px; border-radius: 8px;
+    display: flex; align-items: center; gap: 10px;
+    border-left: 4px solid #775adf;
+}

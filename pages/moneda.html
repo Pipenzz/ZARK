@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cara o Cruz</title>
+    
+    <!-- Íconos y CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <!-- Header con botón de volver -->
+    <header class="header header-secundario">
+        <a href="../index.html" class="material-symbols-outlined btn-volver">arrow_back</a>
+        <h1 class="logo">Moneda</h1>
+    </header>
+
+    <main class="contenedor-principal text-center">
+       <!-- Contenedor de la moneda -->
+        <div class="zona-moneda">
+            <!-- El envoltorio se encarga de hacer el salto hacia arriba -->
+            <div id="moneda-envoltorio">
+                <!-- La moneda 3D se encarga de girar -->
+                <div id="moneda" class="moneda-3d">
+                    <div class="cara-moneda frente">
+                        <span class="texto-moneda">CARA</span>
+                    </div>
+                    <div class="cara-moneda dorso">
+                        <span class="texto-moneda">CRUZ</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botón para tirar -->
+        <button id="btn-tirar" class="btn-accion">Tirar</button>
+        
+        <!-- Mensaje de estado -->
+        <p id="mensaje" class="mensaje-estado"></p>
+    </main>
+
+    <!-- Cargamos la lógica de esta pantalla -->
+    <script src="../js/moneda.js"></script>
+</body>
+</html>

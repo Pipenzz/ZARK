@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruleta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <header class="header header-secundario">
+        <a href="../index.html" class="material-symbols-outlined btn-volver">arrow_back</a>
+        <h1 class="logo">Ruleta</h1>
+    </header>
+
+    <main class="contenedor-principal text-center">
+        
+        <!-- Panel para carga rápida con botón de Limpiar -->
+        <div class="panel-agregar-rapido">
+            <input type="text" id="input-nombre" class="input-form-grande" placeholder="Nombre y tocá Enter...">
+            <button id="btn-limpiar" class="btn-limpiar" title="Borrar todo">
+                <span class="material-symbols-outlined">delete</span>
+            </button>
+        </div>
+
+        <!-- Contenedor de la ruleta visual -->
+        <div class="contenedor-ruleta">
+            <div class="puntero"></div>
+            <canvas id="ruleta-canvas" width="300" height="300"></canvas>
+        </div>
+
+        <button id="btn-girar" class="btn-accion">Girar</button>
+        <p id="mensaje" class="mensaje-estado">Agregá participantes y girá</p>
+
+        <!-- Lista de participantes -->
+        <ul id="lista-participantes" class="lista-nombres"></ul>
+        <p class="texto-ayuda">💡 Tocá un nombre para eliminarlo de la ruleta</p>
+
+    </main>
+
+    <script src="../js/ruleta.js"></script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gastos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <header class="header header-secundario">
+        <a href="../index.html" class="material-symbols-outlined btn-volver">arrow_back</a>
+        <h1 class="logo">Gastos</h1>
+    </header>
+
+    <main class="slider-ventana">
+        <!-- Este contenedor mide 200% de ancho y se mueve para los costados -->
+        <div id="slider-contenedor" class="slider-contenedor">
+            
+            <!-- PANEL 1: INGRESO DE DATOS -->
+            <section class="slider-panel">
+                <div class="panel-agregar-rapido">
+                    <input type="text" id="input-nombre" class="input-form-grande" placeholder="Nombre y tocá Enter...">
+                </div>
+
+                <!-- Lista donde aparecen los nombres con su input de plata -->
+                <ul id="lista-gastos" class="lista-gastos"></ul>
+
+                <button id="btn-calcular" class="btn-accion mt-20">Paguen ratas</button>
+            </section>
+
+            <!-- PANEL 2: RESULTADOS -->
+            <section class="slider-panel panel-resultados">
+                <h2 class="titulo-resultados">Resumen de Cuentas</h2>
+                <div class="resumen-total">
+                    <p>Total gastado: <span id="total-gastado">$0</span></p>
+                    <p>Cada uno paga: <span id="pago-por-cabeza">$0</span></p>
+                </div>
+
+                <ul id="lista-resultados" class="lista-resultados">
+                    <!-- Acá JS inyecta "Juan le debe a Pedro $1000" -->
+                </ul>
+
+                <!-- Nuevo botón con estilo moderno -->
+                <button id="btn-volver-editar" class="btn-outline mt-20">
+                    <span class="material-symbols-outlined">edit</span> Volver a editar
+                </button>
+            </section>
+
+        </div>
+    </main>
+
+    <script src="../js/gastos.js"></script>
+</body>
+</html>
