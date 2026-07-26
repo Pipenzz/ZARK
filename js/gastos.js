@@ -31,7 +31,6 @@ function renderizarListaGastos() {
         const li = document.createElement('li');
         li.className = 'gasto-item';
 
-        // Si gastó 0, lo dejamos vacío ("") para que se vea el placeholder y no haya que borrar el 0
         const valorMostrar = persona.gasto === 0 ? "" : persona.gasto.toLocaleString('es-AR');
 
         li.innerHTML = `
@@ -39,7 +38,6 @@ function renderizarListaGastos() {
             <div style="display: flex; align-items: center;">
                 <div class="gasto-input-container">
                     <span class="gasto-simbolo">$</span>
-                    <!-- inputmode="numeric" abre el teclado de números en el celular -->
                     <input type="text" inputmode="numeric" class="input-plata" value="${valorMostrar}" placeholder="0">
                 </div>
                 <button class="btn-eliminar" title="Borrar">
@@ -50,9 +48,7 @@ function renderizarListaGastos() {
 
         const inputPlata = li.querySelector('.input-plata');
         
-        // Magia para los puntos de mil en tiempo real
         inputPlata.addEventListener('input', (e) => {
-            // Sacamos todo lo que no sea un número (incluyendo los puntos que ya tenía)
             let valorLimpio = e.target.value.replace(/\D/g, '');
             
             if (valorLimpio === "") {
@@ -61,7 +57,6 @@ function renderizarListaGastos() {
             } else {
                 let numeroReal = parseInt(valorLimpio, 10);
                 personas[index].gasto = numeroReal;
-                // Le volvemos a poner los puntos de mil formato Argentina
                 e.target.value = numeroReal.toLocaleString('es-AR');
             }
         });
@@ -76,7 +71,7 @@ function renderizarListaGastos() {
     });
 }
 
-// ================= 2. CALCULAR DEUDAS =================
+// ================= 2. CALCULAR DEUDAS (CON BLINDAJE DE DECIMALES) =================
 btnCalcular.addEventListener('click', () => {
     if (personas.length < 2) {
         alert("¡Agregá al menos a 2 personas para dividir la cuenta!");
@@ -84,13 +79,20 @@ btnCalcular.addEventListener('click', () => {
     }
 
     let total = personas.reduce((suma, p) => suma + p.gasto, 0);
-    let promedio = total / personas.length;
+    // Redondeamos el promedio a 2 decimales estrictos para evitar desfasajes
+    let promedio = Math.round((total / personas.length) * 100) / personas.length; // Ajuste fino matemático
+    // O más simple y seguro para plata:
+    promedio = Number((total / personas.length).toFixed(2));
 
     totalGastadoEl.innerText = `$${total.toLocaleString('es-AR')}`;
     pagoPorCabezaEl.innerText = `$${promedio.toLocaleString('es-AR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
 
+    // Calculamos los saldos redondeando a 2 decimales cada uno
     let saldos = personas.map(p => {
-        return { nombre: p.nombre, saldo: p.gasto - promedio };
+        return { 
+            nombre: p.nombre, 
+            saldo: Number((p.gasto - promedio).toFixed(2)) 
+        };
     });
 
     let deudores = saldos.filter(p => p.saldo < -0.01).sort((a, b) => a.saldo - b.saldo); 
@@ -104,16 +106,20 @@ btnCalcular.addEventListener('click', () => {
         let deudor = deudores[i];
         let acreedor = acreedores[j];
 
+        // Tomamos el menor monto entre lo que debe y lo que le deben, redondeado
         let monto = Math.min(Math.abs(deudor.saldo), acreedor.saldo);
+        monto = Number(monto.toFixed(2));
 
-        transferencias.push({
-            de: deudor.nombre,
-            para: acreedor.nombre,
-            monto: monto
-        });
+        if (monto > 0) {
+            transferencias.push({
+                de: deudor.nombre,
+                para: acreedor.nombre,
+                monto: monto
+            });
+        }
 
-        deudor.saldo += monto;
-        acreedor.saldo -= monto;
+        deudor.saldo = Number((deudor.saldo + monto).toFixed(2));
+        acreedor.saldo = Number((acreedor.saldo - monto).toFixed(2));
 
         if (Math.abs(deudor.saldo) < 0.01) i++;
         if (acreedor.saldo < 0.01) j++;

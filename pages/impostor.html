@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impostor</title>
+    
+    <link rel="apple-touch-icon" href="../img/ZARK.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="ZARK">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <header class="header header-secundario">
+        <a href="../index.html" class="material-symbols-outlined btn-volver">arrow_back</a>
+        <h1 class="logo">Impostor</h1>
+    </header>
+
+    <main class="contenedor-principal">
+        
+        <!-- FASE 1: CONFIGURACIÓN -->
+       <div id="fase-configuracion">
+            <h2 class="subtitulo">Jugadores</h2>
+            <div class="input-grupo" style="display: flex; gap: 10px;">
+                <!-- Le agregamos la clase input-estilo -->
+                <input type="text" id="input-jugador" class="input-estilo" placeholder="Nombre o alias" autocomplete="off">
+                <button id="btn-agregar-jugador" class="btn-secundario">
+                    <span class="material-symbols-outlined">add</span>
+                </button>
+            </div>
+            <ul id="lista-jugadores" class="lista-simple"></ul>
+
+            <h2 class="subtitulo mt-20">Ajustes</h2>
+            <div class="ajustes-grid">
+                <div class="ajuste-item">
+                    <label>Impostores:</label>
+                    <input type="number" id="input-impostores" value="1" min="1" max="5">
+                </div>
+                <div class="ajuste-item">
+                    <label>Minutos:</label>
+                    <input type="number" id="input-tiempo" value="5" min="1" max="15">
+                </div>
+            </div>
+
+            <h2 class="subtitulo mt-20">Temática</h2>
+            <!-- Le sacamos los emojis -->
+            <select id="select-tema" class="select-estilo">
+                <option value="comidas">Comidas</option>
+                <option value="lugares">Lugares</option>
+                <option value="famosos">Famosos</option>
+                <option value="animales">Animales</option>
+                <option value="profesiones">Profesiones</option>
+            </select>
+
+            <button id="btn-iniciar" class="btn-accion mt-20">Comenzar Juego</button>
+        </div>
+
+        <!-- FASE 2: VER ROLES (Pasar el celular) -->
+        <div id="fase-roles" class="oculto text-center">
+            <h2 id="turno-de" class="titulo-grande">Turno de...</h2>
+            <p class="texto-ayuda">¡Asegurate de que nadie más esté mirando la pantalla!</p>
+            
+            <div id="tarjeta-rol" class="tarjeta-rol oculta">
+                <p id="texto-rol" class="rol-destacado">Palabra o Impostor</p>
+            </div>
+
+            <button id="btn-ver-rol" class="btn-accion mt-20">Ver mi rol</button>
+            <button id="btn-ocultar-rol" class="btn-secundario mt-20 oculto">Ocultar y Pasar</button>
+        </div>
+
+        <!-- FASE 3: CRONÓMETRO -->
+        <div id="fase-cronometro" class="oculto text-center">
+            <h2 class="subtitulo">¡Hagan sus preguntas!</h2>
+            <div id="reloj" class="reloj-gigante">05:00</div>
+            <button id="btn-revelar" class="btn-accion mt-20">Revelar Impostor/es</button>
+        </div>
+
+        <!-- FASE 4: RESULTADOS -->
+        <div id="fase-resultados" class="oculto text-center">
+            <h2 class="subtitulo">La palabra secreta era:</h2>
+            <!-- Usamos la clase reloj-gigante acá -->
+            <div class="reloj-gigante" id="palabra-revelada" style="margin-bottom: 20px;">Palabra</div>
+            
+            <h2 class="subtitulo mt-20">Los impostores eran:</h2>
+            <!-- Y también la usamos acá para la lista -->
+            <div class="reloj-gigante" style="padding: 10px;">
+                <ul id="lista-impostores-final" class="lista-impostores"></ul>
+            </div>
+
+            <button id="btn-reiniciar" class="btn-accion mt-20">Jugar otra vez</button>
+        </div>
+
+    </main>
+
+    <script src="../js/impostor.js?v=1"></script>
+</body>
+</html>
