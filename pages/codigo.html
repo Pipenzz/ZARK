@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Código Secreto</title>
+    
+    <link rel="apple-touch-icon" href="../img/ZARK.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="ZARK">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <header class="header header-secundario">
+        <a href="../index.html" class="material-symbols-outlined btn-volver">arrow_back</a>
+        <h1 class="logo">Código Secreto</h1>
+    </header>
+
+    <main class="contenedor-principal">
+        
+        <p class="texto-ayuda text-center">Deslizá hacia los lados para ver todo el tablero.</p>
+
+        <!-- Contenedor que permite scrollear en celulares -->
+        <div class="tablero-wrapper">
+            <div id="tablero-codigo" class="tablero-grid">
+                <!-- Las cartas se generan por JS -->
+            </div>
+        </div>
+
+        <!-- NUEVO: MARCADOR DE EQUIPOS -->
+        <div id="marcador" class="marcador-codigo mt-20">
+            <div class="puntaje puntaje-rojo">🔴 Rojo: <span id="contador-rojo">0</span>/8</div>
+            <div class="puntaje puntaje-azul">🔵 Azul: <span id="contador-azul">0</span>/8</div>
+        </div>
+
+        <!-- Botón del Jefe de Espías -->
+        <div class="controles-espia text-center mt-20">
+            <button id="btn-espia" class="btn-accion">Revelar Mapa Secreto</button>
+        </div>
+
+        <!-- ESTO ES LO QUE FALTABA: Pantalla de Fin de Juego -->
+        <div id="mensaje-fin" class="mensaje-fin-juego oculto text-center mt-20">
+            <h2 id="texto-fin">Gana el Equipo Rojo</h2>
+            <button id="btn-reiniciar-codigo" class="btn-accion mt-20">Jugar de nuevo</button>
+        </div>
+
+
+    </main>
+
+    <script src="../js/codigo.js?v=1"></script>
+</body>
+</html>

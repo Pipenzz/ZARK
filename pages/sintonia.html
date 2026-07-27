@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sintonia</title>
+    
+    <link rel="apple-touch-icon" href="../img/ZARK.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="ZARK">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/style.css?v=5">
+</head>
+<body>
+
+    <header class="header header-secundario">
+        <a href="../index.html" class="material-symbols-outlined btn-volver">arrow_back</a>
+        <h1 class="logo">Sintonia</h1>
+    </header>
+
+    <main class="contenedor-principal">
+        
+        <!-- Marcador con fondo oscuro -->
+        <div class="marcador-sintonia mb-20">
+            <div class="puntaje-sintonia pt-rojo">Rojo: <span id="puntos-rojo">0</span></div>
+            <div class="puntaje-sintonia pt-azul">Azul: <span id="puntos-azul">0</span></div>
+        </div>
+
+        <!-- Caja principal del juego -->
+        <div class="caja-juego text-center">
+            
+            <h2 id="texto-estado" class="subtitulo mb-20">Turno del Psiquico</h2>
+
+            <!-- El Dial Giratorio -->
+            <div class="rueda-container">
+                <div class="rueda-base">
+                    <div id="zona-objetivo" class="zona-objetivo"></div>
+                    <div id="tapa-rueda" class="tapa-rueda">
+                        <span class="material-symbols-outlined icono-misterio">visibility_off</span>
+                    </div>
+                    <div id="aguja" class="aguja"></div>
+                </div>
+            </div>
+
+            <!-- Conceptos horizontales con caja propia -->
+            <div class="conceptos-box">
+                <span id="concepto-izq" class="concepto-texto">Concepto A</span>
+                <span class="material-symbols-outlined icono-flechas">swap_horiz</span>
+                <span id="concepto-der" class="concepto-texto">Concepto B</span>
+            </div>
+
+            <!-- Slider rediseñado -->
+            <div class="slider-container mt-20">
+                <input type="range" id="slider-aguja" min="0" max="180" value="90" disabled>
+            </div>
+
+            <!-- Boton de accion -->
+            <div class="mt-20">
+                <button id="btn-accion-principal" class="btn-accion">Ver Zona Ganadora</button>
+            </div>
+
+        </div>
+
+    </main>
+
+    <script src="../js/sintonia.js?v=5"></script>
+</body>
+</html>

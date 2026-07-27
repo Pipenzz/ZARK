@@ -446,3 +446,426 @@ body { background-color: #121212; color: #ffffff; }
     background: linear-gradient(90deg, #775adf, transparent);
     margin-bottom: 15px;
 }
+
+/* ================= MÓDULO CÓDIGO SECRETO ================= */
+.tablero-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 15px; /* Espacio para la barrita de scroll */
+}
+
+.tablero-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    min-width: 500px; /* Fuerza a que haya scroll en pantallas chicas para que se lea bien */
+}
+
+/* --- TARJETAS --- */
+.carta-codigo {
+    perspective: 1000px;
+    height: 80px;
+    cursor: pointer;
+}
+
+.carta-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+/* El giro 3D (Se activa al tocar la carta o al tocar el botón del Jefe) */
+.carta-codigo.revelada .carta-inner,
+.tablero-grid.modo-espia .carta-inner {
+    transform: rotateY(180deg);
+}
+
+.carta-frente, .carta-dorso {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    text-align: center;
+}
+
+/* Frente (La Palabra) */
+.carta-frente {
+    background-color: #2a2a2a;
+    border: 2px solid #444;
+    color: #fff;
+    font-weight: bold;
+    font-size: 0.9rem;
+    padding: 5px;
+    flex-direction: column;
+}
+
+/* Estado: Esperando el segundo toque */
+.carta-codigo.confirmando .carta-frente {
+    border-color: #f39c12;
+    background-color: #4a3515;
+}
+
+.texto-confirmar {
+    font-size: 0.65rem;
+    color: #f39c12;
+    margin-top: 5px;
+    display: none;
+    text-transform: uppercase;
+}
+
+.carta-codigo.confirmando .texto-confirmar {
+    display: block; /* Se muestra "Seguro?" */
+}
+
+/* Dorso (La Identidad) */
+.carta-dorso {
+    transform: rotateY(180deg);
+    border: 2px solid #111;
+    display: flex;
+    flex-direction: column; /* Apila el ícono y el texto */
+    align-items: center;
+    justify-content: center;
+}
+
+.dorso-rojo { background-color: #ff4757; color: white; }
+.dorso-azul { background-color: #2e86de; color: white; }
+.dorso-civil { background-color: #b2bec3; color: #2d3436; }
+.dorso-asesino { background-color: #1a1a1a; color: #ff4757; border-color: #ff4757;}
+
+.icono-identidad {
+    font-size: 2rem !important; /* Lo achicamos un poco para que entre la palabra */
+}
+
+/* La palabra chiquita que queda cuando se da vuelta */
+.palabra-dorso {
+    font-size: 0.65rem;
+    font-weight: bold;
+    margin-top: 4px;
+    opacity: 0.9;
+    text-transform: uppercase;
+}
+
+.icono-identidad {
+    font-size: 2.5rem !important;
+}
+
+/* --- ESTADOS DEL BOTÓN --- */
+.btn-alerta {
+    background-color: #f39c12 !important;
+    border-color: #e67e22 !important;
+    color: #111 !important;
+}
+
+/* ================= MODULO SINTONIA ================= */
+.marcador-sintonia {
+    display: flex;
+    justify-content: space-around;
+    background-color: #2a2a2a;
+    padding: 15px;
+    border-radius: 12px;
+    border: 2px solid #444;
+}
+
+.puntaje-sintonia {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+.pt-rojo { color: #ff4757; }
+.pt-azul { color: #2e86de; }
+
+.caja-juego {
+    background-color: #1f1f1f;
+    border-radius: 16px;
+    padding: 25px 15px;
+    border: 1px solid #333;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.conceptos-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #111;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #444;
+    margin: 20px auto 0 auto;
+    width: 100%;
+    max-width: 350px;
+    gap: 10px;
+}
+
+.concepto-texto {
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: #fff;
+    flex: 1;
+    text-align: center;
+    word-break: break-word;
+}
+
+.icono-flechas {
+    color: #775adf;
+    font-size: 1.5rem;
+}
+
+.rueda-container {
+    width: 300px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.rueda-base {
+    width: 300px;
+    height: 150px;
+    background-color: #111;
+    border-top-left-radius: 150px;
+    border-top-right-radius: 150px;
+    position: relative;
+    overflow: hidden;
+    border: 4px solid #444;
+    border-bottom: none;
+}
+
+.zona-objetivo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200%; 
+    border-radius: 50%;
+    background: conic-gradient(from 270deg at 50% 50%, transparent 0deg, transparent 60deg, #b2bec3 60deg, #b2bec3 76deg, #f1c40f 76deg, #f1c40f 86deg, #ff4757 86deg, #ff4757 94deg, #f1c40f 94deg, #f1c40f 104deg, #b2bec3 104deg, #b2bec3 120deg, transparent 120deg);
+    transform-origin: center center;
+    transition: transform 0.5s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+
+.tapa-rueda {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: #2a2a2a;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.3s;
+}
+
+.icono-misterio {
+    font-size: 3rem;
+    color: #555;
+    margin-top: 30px;
+}
+
+.tapa-rueda.oculta {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.aguja {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-left: -3px;
+    width: 6px;
+    height: 140px;
+    background-color: #fff;
+    border-radius: 3px;
+    transform-origin: bottom center;
+    z-index: 10;
+    transition: transform 0.1s linear;
+    box-shadow: 0 0 8px rgba(0,0,0,0.8);
+}
+
+/* Diseño personalizado del slider para que siempre se vea bien */
+/* Diseño personalizado del slider para que siempre se vea bien */
+.slider-container input[type=range] {
+    -webkit-appearance: none;
+    width: 100%;
+    max-width: 100%; /* ACÁ ESTÁ EL CAMBIO: ahora se estira a lo ancho de la caja */
+    height: 18px; 
+    background: #333;
+    border-radius: 9px;
+    outline: none;
+}
+
+.slider-container input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 29px; /* Circulo mucho mas grande */
+    height: 29px;
+    border-radius: 50%;
+    background: #775adf;
+    cursor: pointer;
+}
+
+/* Color del circulo del slider cuando esta deshabilitado */
+.slider-container input[type=range]:disabled::-webkit-slider-thumb {
+    background: #f39c12; 
+}
+
+/* ================= MODULO QUIPLASH ================= */
+.input-grupo {
+    display: flex;
+    gap: 10px;
+}
+
+.input-estilo, .textarea-estilo {
+    width: 100%;
+    padding: 12px;
+    background-color: #111;
+    border: 2px solid #444;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+}
+
+.input-estilo:focus, .textarea-estilo:focus {
+    border-color: #775adf;
+}
+
+.lista-jugadores {
+    list-style: none;
+    padding: 0;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.lista-jugadores li {
+    background-color: #111;
+    padding: 10px 15px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #333;
+}
+
+.frase-card {
+    background-color: #111;
+    padding: 15px;
+    border-radius: 12px;
+    border-left: 4px solid #775adf;
+}
+
+.etiqueta-fase {
+    font-size: 0.8rem;
+    color: #aaa;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.frase-texto {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #fff;
+    margin-top: 5px;
+}
+
+/* Tarjetas Anónimas del Juez */
+.tarjetas-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.tarjeta-respuesta {
+    background-color: #111;
+    border: 2px solid #444;
+    border-radius: 12px;
+    padding: 15px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.tarjeta-respuesta.revelada {
+    background-color: #2a2a2a;
+    border-color: #775adf;
+}
+
+.tarjeta-respuesta.seleccionada-3 {
+    border-color: #f1c40f !important;
+    background-color: #3d3511 !important;
+}
+
+.tarjeta-respuesta.seleccionada-2 {
+    border-color: #3498db !important;
+    background-color: #163244 !important;
+}
+
+.tarjeta-respuesta.seleccionada-1 {
+    border-color: #e67e22 !important;
+    background-color: #3d2311 !important;
+}
+
+.badge-puntos {
+    position: absolute;
+    right: 15px;
+    background: #775adf;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 0.85rem;
+}
+
+.leaderboard-box {
+    background-color: #111;
+    border-radius: 12px;
+    padding: 15px;
+    border: 1px solid #444;
+    text-align: left;
+}
+
+.leaderboard-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #222;
+    font-size: 1.1rem;
+}
+.leaderboard-item:last-child {
+    border-bottom: none;
+}
+
+/* ================= MEJORAS LOBBY QUIPLASH ================= */
+.lista-jugadores li {
+    background-color: #1a1a1a;
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #333;
+    font-weight: bold;
+}
+
+.btn-eliminar-jugador {
+    background: transparent;
+    border: none;
+    color: #ff4757;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
+
+.btn-eliminar-jugador:hover {
+    color: #ff6b81;
+}

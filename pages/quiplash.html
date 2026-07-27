@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiplash</title>
+    
+    <link rel="apple-touch-icon" href="../img/ZARK.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="ZARK">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/style.css?v=6">
+</head>
+<body>
+
+    <header class="header header-secundario">
+        <a href="../index.html" class="material-symbols-outlined btn-volver">arrow_back</a>
+        <h1 class="logo">Quiplash</h1>
+    </header>
+
+    <main class="contenedor-principal">
+        
+       <!-- FASE 1: AGREGAR JUGADORES -->
+        <div id="pantalla-setup" class="caja-juego">
+            <h2 class="subtitulo text-center mb-10">Quiplash Local</h2>
+            <p id="contador-minimo" class="texto-ayuda text-center mb-20">Agrega al menos 3 jugadores para comenzar</p>
+            
+            <div class="input-grupo">
+                <input type="text" id="input-nombre" placeholder="Nombre del jugador" class="input-estilo" autocomplete="off">
+                <button id="btn-agregar" class="btn-accion">Agregar</button>
+            </div>
+            
+            <ul id="lista-jugadores" class="lista-jugadores mt-20">
+                <!-- Se llenan por JS -->
+            </ul>
+            
+            <button id="btn-iniciar" class="btn-accion mt-20" disabled>Comenzar Partida</button>
+        </div>
+
+        <!-- FASE 2: PANTALLA INTERMEDIA DE PASE (SEGURIDAD) -->
+        <div id="pantalla-pase" class="caja-juego oculto text-center">
+            <h2 class="subtitulo mb-20" id="titulo-pase">Ponele el celu a alguien</h2>
+            <p id="texto-aviso-pase" class="texto-ayuda mb-20">Asegurate de que nadie más mire la pantalla.</p>
+            <button id="btn-listo-pase" class="btn-accion">Soy <span id="nombre-siguiente">Jugador</span></button>
+        </div>
+
+        <!-- FASE 3: ESCRITURA DE RESPUESTA -->
+        <div id="pantalla-escritura" class="caja-juego oculto">
+            <div class="frase-card mb-20">
+                <span class="etiqueta-fase">Consigna para <span id="turno-escritor"></span></span>
+                <p id="texto-consigna-escritura" class="frase-texto"></p>
+            </div>
+            <textarea id="input-respuesta" class="textarea-estilo" placeholder="Escribi tu respuesta" rows="3"></textarea>
+            <button id="btn-enviar-respuesta" class="btn-accion mt-20">Enviar Respuesta</button>
+        </div>
+
+        <!-- FASE 4: TURNO DEL JUEZ (TARJETAS ANÓNIMAS) -->
+        <div id="pantalla-juez" class="caja-juego oculto">
+            <div class="frase-card mb-20">
+                <span class="etiqueta-fase">Turno del Juez: <span id="nombre-juez"></span></span>
+                <p id="texto-consigna-juez" class="frase-texto"></p>
+            </div>
+            <p class="texto-ayuda text-center mb-20">Toca cada tarjeta para leer la respuesta en voz alta. Luego elegí el podio.</p>
+            
+            <div id="contenedor-tarjetas" class="tarjetas-grid">
+                <!-- Se generan las tarjetas anónimas dinámicamente -->
+            </div>
+
+            <div id="panel-podio-info" class="text-center mt-20 oculto">
+                <p id="texto-instruccion-podio" class="subtitulo">Selecciona la de 3 Puntos</p>
+                <button id="btn-confirmar-podio" class="btn-accion mt-10" disabled>Confirmar Podio</button>
+            </div>
+        </div>
+
+        <!-- FASE 5: LEADERBOARD DE RONDA -->
+        <div id="pantalla-leaderboard" class="caja-juego oculto text-center">
+            <h2 class="subtitulo mb-20">Tabla de Posiciones</h2>
+            <div id="lista-leaderboard" class="leaderboard-box mb-20">
+                <!-- Puntajes parciales -->
+            </div>
+            <button id="btn-siguiente-ronda" class="btn-accion">Siguiente Ronda</button>
+        </div>
+
+    </main>
+
+    <script src="../js/quiplash.js?v=6"></script>
+</body>
+</html>
