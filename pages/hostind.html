@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZARK - Crear Partida</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        body, html { margin: 0; padding: 0; background-color: #0a0a0a; color: #ffffff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; height: 100%; }
+        
+        /* HEADER ZARK (Centrado, oscuro) */
+        .header-zark { background-color: #111; padding: 15px 20px; display: flex; align-items: center; justify-content: center; position: relative; border-bottom: 2px solid #222; }
+        .header-zark .btn-volver { position: absolute; left: 20px; color: #fff; font-size: 1.8rem; text-decoration: none; font-weight: bold; transition: color 0.2s; }
+        .header-zark .btn-volver:hover { color: #775adf; }
+        .header-zark .logo { margin: 0; font-size: 1.5rem; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; color: #fff; }
+
+        .contenedor-principal { display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: calc(100vh - 70px); padding: 20px; box-sizing: border-box; }
+        
+        /* CAJA PRINCIPAL (El Box) */
+        .caja-zark { background-color: #1a1a1a; padding: 30px; border-radius: 20px; border: 2px solid #333; box-shadow: 0 8px 25px rgba(0,0,0,0.5); width: 100%; max-width: 500px; box-sizing: border-box; }
+        
+        /* INPUTS */
+        .input-zark { width: 100%; background-color: #2a2a2a; color: #fff; border: 2px solid #444; padding: 15px; border-radius: 12px; font-size: 1.2rem; text-align: center; margin-bottom: 15px; box-sizing: border-box; transition: all 0.3s; text-transform: uppercase; letter-spacing: 2px; }
+        .input-zark::placeholder { letter-spacing: normal; font-weight: normal; color: #777; }
+        .input-zark:focus { outline: none; border-color: #775adf; box-shadow: 0 0 10px rgba(119, 90, 223, 0.2); }
+        
+        /* BOTONES */
+        .btn-zark { width: 100%; padding: 15px; font-size: 1.2rem; font-weight: bold; background-color: #fff; color: #111; border: none; border-radius: 12px; cursor: pointer; transition: transform 0.2s, background-color 0.2s; margin-bottom: 10px; }
+        .btn-zark:active { transform: scale(0.95); }
+        .btn-zark.violeta { background-color: #775adf; color: #fff; }
+        .btn-zark.violeta:hover { background-color: #634bc9; }
+
+        /* GRILLA DE JUEGOS */
+        .grilla-juegos { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px; }
+        .btn-juego-ind { background: #222; border: 2px solid #444; color: #888; padding: 15px 10px; border-radius: 12px; cursor: pointer; font-weight: bold; font-size: 1rem; transition: all 0.2s; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+        .btn-juego-ind .icono { font-size: 2rem; color: #555; transition: color 0.2s; }
+        .btn-juego-ind.seleccionado { background: #1a1a1a; color: #fff; border-color: #775adf; box-shadow: 0 5px 15px rgba(119, 90, 223, 0.2); transform: translateY(-3px); }
+        .btn-juego-ind.seleccionado .icono { color: #775adf; }
+
+        /* ELEMENTOS DEL LOBBY */
+        .pin-gigante { font-size: 4.5rem; text-align: center; letter-spacing: 12px; margin: 15px 0; color: #fff; font-weight: 900; background: linear-gradient(135deg, #775adf, #9b59b6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .jugador-item { background: #222; padding: 12px 20px; margin: 8px 0; border-radius: 10px; border-left: 5px solid #775adf; font-size: 1.1rem; font-weight: bold; text-align: left; }
+        
+        .oculto { display: none !important; }
+        .text-center { text-align: center; }
+        /* Cambiá el borde de los inputs al hacer focus */
+.input-comun:focus, .input-zark:focus { outline: none; border-color: #00ffcc; box-shadow: 0 0 10px rgba(0, 255, 204, 0.2); }
+
+/* Cambiá el color de los botones principales */
+.btn-comun, .btn-zark.violeta { background-color: #00ffcc; color: #000; }
+.btn-comun:active, .btn-zark.violeta:hover { background-color: #00ccaa; }
+
+/* Mejoramos la lista de jugadores para que no se vea fea (letra de consola y borde verde) */
+.jugador-item { background: #111; padding: 12px 20px; margin: 8px 0; border-radius: 4px; border-left: 5px solid #00ffcc; font-size: 1.1rem; font-weight: bold; text-align: left; font-family: 'Courier New', Courier, monospace; letter-spacing: 1px; color: #fff; box-shadow: 0 2px 5px rgba(0,255,204,0.1); }
+    </style>
+</head>
+<body>
+    <header class="header-zark">
+        <a href="../index.html" class="material-symbols-outlined btn-volver">arrow_back</a>
+        <h1 class="logo">CREAR SALA</h1>
+    </header>
+
+    <main class="contenedor-principal">
+        
+        <!-- FASE 1: SELECCIÓN DE JUEGO Y NOMBRE -->
+        <div id="pantalla-crear" class="caja-zark text-center">
+            <h2 style="margin-top: 0; margin-bottom: 20px; font-size: 1.4rem; color: #fff;">Elegí a qué jugar</h2>
+            <div class="grilla-juegos">
+                <button class="btn-juego-ind seleccionado" data-juego="hacker">
+                    <span class="material-symbols-outlined icono">terminal</span>
+                    Hackers (4 jugadores)
+                </button>
+                <button class="btn-juego-ind" data-juego="battleship">
+                    <span class="material-symbols-outlined icono">sailing</span>
+                    Batalla Naval (1v1)
+                </button>
+            </div>
+            
+            <input type="text" id="input-nombre" class="input-zark" placeholder="TU APODO" maxlength="12" autocomplete="off">
+            <button id="btn-crear-sala" class="btn-zark violeta">Crear Partida</button>
+            <p id="mensaje-error" style="color: #e74c3c; font-weight: bold; margin-top: 10px;"></p>
+        </div>
+
+        <!-- FASE 2: LOBBY DEL HOST -->
+        <div id="pantalla-lobby" class="caja-zark oculto">
+            <h2 class="text-center" style="margin-top: 0; font-size: 1.2rem; color: #aaa;">CÓDIGO DE INVITACIÓN</h2>
+            <div id="pin-display" class="pin-gigante">----</div>
+            
+            <h3 style="margin-top: 25px; border-bottom: 2px solid #333; padding-bottom: 10px; color: #fff; text-align: left;">Jugadores Conectados:</h3>
+            <div id="lista-jugadores" style="margin-bottom: 25px; min-height: 80px;"></div>
+            
+            <button id="btn-arrancar-juego" class="btn-zark violeta">Arrancar Juego</button>
+        </div>
+
+        <!-- FASE 3: INTERFAZ DEL JUEGO DEL HOST -->
+        <div id="pantalla-juego-host" class="oculto caja-zark">
+            <h2 class="text-center" style="color: #775adf;">JUEGO EN CURSO</h2>
+        </div>
+
+    </main>
+    <script type="module" src="../js/hostind.js"></script>
+</body>
+</html>

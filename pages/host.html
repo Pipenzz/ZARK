@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZARK - Crear sala</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        body, html { margin: 0; padding: 0; background-color: #0a0a0a; color: #ffffff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; height: 100%; }
+        
+        /* HEADER ZARK (Centrado, oscuro) */
+        .header-zark { background-color: #111; padding: 15px 20px; display: flex; align-items: center; justify-content: center; position: relative; border-bottom: 2px solid #222; }
+        .header-zark .btn-volver { position: absolute; left: 20px; color: #fff; font-size: 1.8rem; text-decoration: none; font-weight: bold; transition: color 0.2s; }
+        .header-zark .btn-volver:hover { color: #775adf; }
+        .header-zark .logo { margin: 0; font-size: 1.5rem; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; color: #fff; }
+
+        .contenedor-principal { display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: calc(100vh - 70px); padding: 20px; box-sizing: border-box; }
+        
+        /* CAJA PRINCIPAL */
+        /* Para el host de TV la hacemos un poco más ancha que la del celu */
+        .caja-zark { background-color: #1a1a1a; padding: 30px; border-radius: 20px; border: 2px solid #333; box-shadow: 0 8px 30px rgba(0,0,0,0.6); width: 100%; max-width: 800px; box-sizing: border-box; }
+        .caja-seleccion { max-width: 500px; } /* Más chica solo para el menú inicial */
+
+        /* GRILLA DE JUEGOS */
+        .grilla-juegos { display: grid; grid-template-columns: 1fr; gap: 15px; margin-bottom: 25px; }
+        .btn-juego { background: #222; border: 2px solid #444; color: #888; padding: 20px 10px; border-radius: 12px; cursor: pointer; font-weight: bold; font-size: 1.2rem; transition: all 0.2s; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+        .btn-juego .icono { font-size: 2.5rem; color: #555; transition: color 0.2s; }
+        .btn-juego:hover { background: #1a1a1a; color: #fff; border-color: #775adf; box-shadow: 0 5px 15px rgba(119, 90, 223, 0.2); transform: translateY(-3px); }
+        .btn-juego:hover .icono { color: #775adf; }
+
+        /* ELEMENTOS DEL LOBBY Y JUEGO */
+        .pin-gigante { font-size: 6rem; text-align: center; letter-spacing: 15px; margin: 20px 0; color: #fff; font-weight: 900; background: linear-gradient(135deg, #775adf, #9b59b6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        /* Chips de jugadores para la pantalla grande */
+        #jugadores-conectados { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
+        .jugador-chip { background: #222; padding: 12px 25px; border-radius: 30px; border: 2px solid #775adf; font-size: 1.3rem; font-weight: bold; box-shadow: 0 4px 10px rgba(119, 90, 223, 0.2); }
+        
+        .oculto { display: none !important; }
+        .text-center { text-align: center; }
+        
+        /* Ajustes extra para cuando el JS inyecta el contenido del juego */
+        .subtitulo { font-size: 2rem; }
+        .texto-ayuda { font-size: 1.2rem; color: #aaa; }
+        .caja-scroll { max-height: 50vh; overflow-y: auto; padding-right: 10px; }
+    </style>
+</head>
+<body>
+    <header class="header-zark">
+        <a href="../index.html" class="material-symbols-outlined btn-volver">arrow_back</a>
+        <h1 class="logo">CREAR SALA</h1>
+    </header>
+
+    <main class="contenedor-principal">
+        
+        <!-- FASE 1: SELECCIÓN DE JUEGO (Acá el Host elige qué se va a jugar) -->
+        <div id="pantalla-seleccion" class="caja-zark caja-seleccion text-center">
+            <h2 style="margin-top: 0; margin-bottom: 25px; font-size: 1.5rem; color: #fff;">Elegí el Party Game</h2>
+            
+            <div class="grilla-juegos">
+                <!-- Solo dejamos El Diccionario por ahora -->
+                <button class="btn-juego" data-juego="diccionario">
+                    <span class="material-symbols-outlined icono">menu_book</span>
+                    <span class="texto">El Diccionario</span>
+                </button>
+            </div>
+            
+            <p style="color: #666; font-size: 0.95rem; margin-top: 15px;">Esta pantalla debe ser visible para todos los jugadores.</p>
+        </div>
+
+        <!-- FASE 2 y 3: LOBBY Y JUEGO EN SÍ -->
+        <!-- JS va a sobreescribir el interior de este div cuando empiece la ronda -->
+        <div id="pantalla-lobby" class="caja-zark oculto">
+            <h2 id="titulo-juego" class="text-center" style="margin-top: 0; font-size: 2rem; color: #775adf; text-transform: uppercase; letter-spacing: 2px;">SALA</h2>
+            <h3 class="text-center" style="color: #aaa; font-size: 1.2rem; margin: 10px 0 0 0;">CÓDIGO PARA UNIRSE</h3>
+            
+            <div id="pin-display" class="pin-gigante">----</div>
+            
+            <h3 style="margin-top: 30px; border-bottom: 2px solid #333; padding-bottom: 10px; color: #fff; text-align: center; font-size: 1.4rem;">Jugadores Conectados</h3>
+            
+            <div id="jugadores-conectados" style="margin-top: 25px; min-height: 100px;">
+                <!-- Acá aparecen las pastillitas con los nombres de los que entran -->
+            </div>
+        </div>
+
+    </main>
+    <script type="module" src="../js/host.js"></script>
+</body>
+</html>

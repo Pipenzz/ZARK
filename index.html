@@ -14,6 +14,8 @@
     <!-- Fuentes y estilos -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link rel="stylesheet" href="css/style.css">
+    <!-- Se le pone type="module" para que soporte imports -->
+    <script type="module" src="../js/supabase.js"></script>
 </head>
 <body>
 
@@ -23,7 +25,6 @@
         <span class="material-symbols-outlined menu-btn">menu</span>
     </header>
 
-    <!-- La cuadrícula de opciones -->
     <!-- La cuadrícula de opciones -->
     <main class="contenedor-principal">
         
@@ -53,9 +54,9 @@
             </nav>
         </div>
 
-        <!-- CATEGORÍA: JUNTADA -->
+        <!-- CATEGORÍA: Utilidad -->
         <div class="categoria-modulo">
-            <h2 class="titulo-categoria">Juntada</h2>
+            <h2 class="titulo-categoria">Utilidad</h2>
             <hr class="divisor-categoria">
 
             <nav class="grid-cuadrados">
@@ -65,6 +66,16 @@
                     <span class="texto">Gastos</span>
                 </a>
 
+            </nav>
+        </div>                
+
+
+        <!-- CATEGORÍA: Juegos offline -->
+        <div class="categoria-modulo">
+            <h2 class="titulo-categoria">Juegos offline</h2>
+            <hr class="divisor-categoria">
+
+            <nav class="grid-cuadrados">
                 <!-- Cuadrado 5: Impostor -->
                 <a href="pages/impostor.html" class="cuadrado">
                     <span class="material-symbols-outlined icono">person_search</span>
@@ -89,8 +100,53 @@
                     <span class="texto">Quiplash</span>
                 </a>
 
-            </nav>
+            </nav>   
         </div>
+
+
+         <div class="categoria-modulo">
+            <h2 class="titulo-categoria">Juegos online</h2>
+            <hr class="divisor-categoria">
+
+            <nav class="grid-cuadrados">
+            <a href="pages/host.html" class="cuadrado">
+                <span class="material-symbols-outlined icono">cast</span>
+                <span class="texto">Crear Sala</span>
+            </a>
+
+            <!-- Botón para los celulares -->
+            <a href="pages/mando.html" class="cuadrado">
+                <span class="material-symbols-outlined icono">sports_esports</span>
+                <span class="texto">Unirse</span>
+            </a>
+
+            </nav>
+        </div> 
+
+
+                <!-- CATEGORÍA: Juegos online -->
+        <div class="categoria-modulo">
+            <h2 class="titulo-categoria">Juegos online (celular individual)</h2>
+            <hr class="divisor-categoria">
+
+            <nav class="grid-cuadrados">
+            <a href="pages/hostind.html" class="cuadrado">
+                <span class="material-symbols-outlined icono">cast</span>
+                <span class="texto">Crear Sala</span>
+            </a>
+
+            <!-- Botón para los celulares -->
+            <a href="pages/mandoind.html" class="cuadrado">
+                <span class="material-symbols-outlined icono">sports_esports</span>
+                <span class="texto">Unirse</span>
+            </a>
+
+            </nav>
+        </div> 
+
+
+
+
 
     </main>
 

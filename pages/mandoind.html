@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZARK - Unirse</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        body, html { margin: 0; padding: 0; background-color: #0a0a0a; color: #ffffff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; height: 100%; }
+        
+        /* HEADER ZARK (Centrado, oscuro) */
+        .header-zark { background-color: #111; padding: 15px 20px; display: flex; align-items: center; justify-content: center; position: relative; border-bottom: 2px solid #222; }
+        .header-zark .btn-volver { position: absolute; left: 20px; color: #fff; font-size: 1.8rem; text-decoration: none; font-weight: bold; transition: color 0.2s; }
+        .header-zark .btn-volver:hover { color: #775adf; }
+        .header-zark .logo { margin: 0; font-size: 1.5rem; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; color: #fff; }
+
+        .contenedor-principal { display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: calc(100vh - 70px); padding: 20px; box-sizing: border-box; }
+        
+        /* CAJA PRINCIPAL (El Box) */
+        .caja-zark { background-color: #1a1a1a; padding: 30px; border-radius: 20px; border: 2px solid #333; box-shadow: 0 8px 25px rgba(0,0,0,0.5); width: 100%; max-width: 500px; box-sizing: border-box; }
+        
+        /* INPUTS */
+        .input-zark { width: 100%; background-color: #2a2a2a; color: #fff; border: 2px solid #444; padding: 15px; border-radius: 12px; font-size: 1.2rem; text-align: center; margin-bottom: 15px; box-sizing: border-box; transition: all 0.3s; text-transform: uppercase; letter-spacing: 2px; }
+        .input-zark::placeholder { letter-spacing: normal; font-weight: normal; color: #777; }
+        .input-zark:focus { outline: none; border-color: #775adf; box-shadow: 0 0 10px rgba(119, 90, 223, 0.2); }
+        
+        /* BOTONES */
+        .btn-zark { width: 100%; padding: 15px; font-size: 1.2rem; font-weight: bold; background-color: #fff; color: #111; border: none; border-radius: 12px; cursor: pointer; transition: transform 0.2s, background-color 0.2s; margin-bottom: 10px; }
+        .btn-zark:active { transform: scale(0.95); }
+        .btn-zark.violeta { background-color: #775adf; color: #fff; }
+        .btn-zark.violeta:hover { background-color: #634bc9; }
+
+        .jugador-item { background: #222; padding: 12px 20px; margin: 8px 0; border-radius: 10px; border-left: 5px solid #775adf; font-size: 1.1rem; font-weight: bold; text-align: left; }
+        
+        .oculto { display: none !important; }
+        .text-center { text-align: center; }
+    </style>
+</head>
+<body>
+    <header class="header-zark">
+        <a href="../index.html" class="material-symbols-outlined btn-volver">arrow_back</a>
+        <h1 class="logo">UNIRSE A SALA</h1>
+    </header>
+
+    <main class="contenedor-principal">
+        
+        <!-- FASE 1: INGRESO PIN Y NOMBRE -->
+        <div id="pantalla-ingreso" class="caja-zark text-center">
+            <h2 style="margin-top: 0; margin-bottom: 20px; font-size: 1.4rem; color: #fff;">Conectarse a la partida</h2>
+            <input type="text" id="input-pin" class="input-zark" placeholder="CÓDIGO (PIN)" maxlength="4" autocomplete="off" style="font-size: 1.5rem; letter-spacing: 8px;">
+            <input type="text" id="input-nombre" class="input-zark" placeholder="TU APODO" maxlength="12" autocomplete="off">
+            <button id="btn-unirse" class="btn-zark violeta">Entrar a la Sala</button>
+            <p id="mensaje-error" style="color: #e74c3c; font-weight: bold; margin-top: 10px;"></p>
+        </div>
+
+        <!-- FASE 2: ESPERA EN LOBBY -->
+        <div id="pantalla-espera" class="caja-zark text-center oculto">
+            <span class="material-symbols-outlined" style="font-size: 4rem; color: #775adf; margin-bottom: 10px;">check_circle</span>
+            <h2 style="color: #fff; margin-top: 0; font-size: 1.5rem;">¡Estás adentro!</h2>
+            <p style="color: #aaa; margin: 15px 0 25px 0;">Esperando que el Host inicie el juego...</p>
+            
+            <h3 style="border-bottom: 2px solid #333; padding-bottom: 10px; color: #fff; text-align: left; margin-top: 20px;">Jugadores en sala:</h3>
+            <div id="lista-jugadores" style="min-height: 80px;"></div>
+        </div>
+
+        <!-- FASE 3: INTERFAZ DE JUEGO PARA INVITADOS -->
+        <div id="pantalla-juego-invitado" class="oculto caja-zark">
+            <h2 class="text-center" style="color: #775adf;">JUEGO EN CURSO</h2>
+        </div>
+
+    </main>
+    <script type="module" src="../js/mandoind.js"></script>
+</body>
+</html>

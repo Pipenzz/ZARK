@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZARK - Mando</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .mando-contenedor { display: flex; flex-direction: column; justify-content: center; min-height: 85vh; }
+        .caja-juego { background-color: #1a1a1a; padding: 30px; border-radius: 20px; border: 2px solid #333; box-shadow: 0 8px 25px rgba(0,0,0,0.5); display: flex; flex-direction: column; gap: 20px; align-items: center; }
+        .input-mando { width: 100%; box-sizing: border-box; text-transform: uppercase; letter-spacing: 4px; font-size: 1.2rem; text-align: center; background-color: #2a2a2a; color: #fff; border: 2px solid #555; padding: 15px; border-radius: 12px; }
+        .input-mando:focus { border-color: #775adf; outline: none; }
+        .input-mando::placeholder { letter-spacing: normal; font-size: 1.1rem; font-weight: normal; color: #777; }
+        #btn-unirse { width: 100%; padding: 15px; font-size: 1.2rem; font-weight: bold; background-color: #fff; color: #111; border: none; border-radius: 12px; cursor: pointer; transition: transform 0.2s; }
+        #btn-unirse:active { transform: scale(0.95); }
+        .pantalla-espera-activa { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+        .oculto { display: none !important; }
+    </style>
+</head>
+<body>
+    <header class="header header-secundario">
+        <a href="../index.html" class="material-symbols-outlined btn-volver">arrow_back</a>
+        <h1 class="logo">ZARK</h1>
+    </header>
+    <main class="contenedor-principal mando-contenedor">
+        
+        <!-- FASE 1: INGRESO -->
+        <div id="pantalla-ingreso">
+            <h2 class="subtitulo text-center mb-20">Unirse a una partida</h2>
+            <div class="caja-juego">
+                <input type="text" id="input-pin" class="input-estilo input-mando" placeholder="CÓDIGO (Ej: A4X9)" maxlength="4" autocomplete="off">
+                <input type="text" id="input-nombre" class="input-estilo input-mando" placeholder="Tu Nombre o Apodo" maxlength="12" autocomplete="off">
+                <button id="btn-unirse" class="btn-accion">Entrar a la Sala</button>
+                <p id="mensaje-error" class="texto-ayuda text-center mt-10" style="color: #ff4757;"></p>
+            </div>
+        </div>
+
+        <!-- FASE 2: ESPERANDO Y CONTROLES DEL DIRECTOR -->
+        <div id="pantalla-espera" class="pantalla-espera-activa oculto">
+            <span class="material-symbols-outlined" style="font-size: 4rem; color: #775adf;">videogame_asset</span>
+            <h2 class="subtitulo mt-10">¡Estás adentro!</h2>
+            <p id="texto-espera" class="texto-ayuda mt-10">Mirá la pantalla principal...</p>
+            
+            <!-- Botón exclusivo para el VIP -->
+            <button id="btn-director-arrancar" class="btn-accion mt-20 oculto" style="background-color: #3498db; width: 100%; border: none; padding: 15px; border-radius: 12px; font-size: 1.2rem; font-weight: bold; color: #fff;">¡Arrancar Partida!</button>
+        </div>
+
+        <!-- FASE 3: ESCRITURA DICCIONARIO -->
+        <div id="control-diccionario" class="caja-juego oculto" style="background-color: #f4ecd8; border: 2px solid #c8b79b; border-left: 12px solid #e67e22;">
+            <h3 id="dic-palabra" class="text-center" style="font-family: 'Georgia', serif; font-size: 2.5rem; color: #2c3e50; text-transform: lowercase; letter-spacing: 1px; border-bottom: 2px solid #c8b79b; padding-bottom: 10px; margin-top: 0; width: 100%;"></h3>
+            <p id="dic-instruccion" class="text-center mb-10 mt-10" style="font-size: 1.1rem; color: #555; font-style: italic;"></p>
+            
+            <div id="dic-input-container" style="width: 100%;">
+                <input type="text" id="input-definicion" class="input-estilo input-mando" placeholder="Escribí una definición formal..." style="text-transform: none; color: #fff; letter-spacing: normal; background-color: #2a2a2a;">
+                <button id="btn-mandar-chamuyo" class="btn-accion mt-20" style="width: 100%; padding: 15px; border-radius: 12px; background-color: #e67e22; color: #fff; border: none; font-weight: bold; font-size: 1.2rem;">Enviar Mentira</button>
+            </div>
+        </div>
+
+        <!-- FASE 4: VOTACIÓN -->
+        <div id="control-votacion" class="caja-juego oculto" style="background-color: #f4ecd8; border: 2px solid #c8b79b;">
+            <h3 class="text-center mb-10" style="color: #2c3e50; font-family: 'Georgia', serif;">¿Cuál es la posta?</h3>
+            <div id="contenedor-botones-voto" style="display: flex; flex-direction: column; gap: 10px; width: 100%;"></div>
+            <p id="mensaje-espera-voto" class="text-center mt-10 oculto" style="color: #555; font-style: italic;"></p>
+        </div>
+    </main>
+    <script type="module" src="../js/mando.js"></script>
+</body>
+</html>

@@ -12,7 +12,6 @@ const ptsAzul = document.getElementById('puntos-azul');
 
 const bancoConceptos = [
     ["Mondongo", "Manjar"],
-    ["Asado quemado", "Asado del diego"],
     ["Juego aburrido", "Frenetico y competitivo"],
     ["Frio", "Caliente"],
     ["Pilates", "Triatlon"],

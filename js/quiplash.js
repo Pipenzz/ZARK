@@ -183,6 +183,7 @@ btnEnviarRespuesta.addEventListener('click', () => {
 // --- 4. FASE DEL JUEZ ---
 function renderizarTarjetasJuez() {
     contenedorTarjetas.innerHTML = '';
+    tarjeta.sort(() => Math.random()-0.5);
 
     respuestasRonda.forEach((resp, index) => {
         let tarjeta = document.createElement('div');

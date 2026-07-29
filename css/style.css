@@ -869,3 +869,64 @@ body { background-color: #121212; color: #ffffff; }
 .btn-eliminar-jugador:hover {
     color: #ff6b81;
 }
+
+/* ========================================= */
+/* ESTILOS ESPECÍFICOS: MODO HACKER 1v1      */
+/* ========================================= */
+
+.transicion-matrix { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; height: 100%; min-height: 60vh; background: #000; border-radius: 15px; border: 1px solid #00ff33; padding: 20px; }
+.texto-matrix { font-size: 1.3rem; text-align: left; color: #00ff33; text-shadow: 0 0 8px #00ff33; white-space: pre-wrap; line-height: 2; font-family: 'Courier New', Courier, monospace; font-weight: bold; margin-left: 15px; }
+
+.interfaz-hacker { display: flex; flex-direction: column; gap: 15px; font-family: 'Courier New', Courier, monospace; }
+.panel-estado-hacker { background: #111; border: 1px solid #333; padding: 15px; border-radius: 12px; }
+.etiqueta-barra { font-size: 0.9rem; font-weight: bold; margin-bottom: 5px; color: #aaa; text-transform: uppercase; }
+
+.barra-contenedor { background: #222; height: 20px; border-radius: 4px; overflow: hidden; margin-bottom: 10px; border: 1px solid #444; }
+.barra-fill { height: 100%; transition: width 0.3s, background-color 0.3s; }
+.bg-verde { background: #00ff33; box-shadow: 0 0 10px rgba(0, 255, 51, 0.5); }
+.bg-rojo { background: #ff3333; box-shadow: 0 0 10px rgba(255, 51, 51, 0.5); }
+.bg-azul { background: #3399ff; box-shadow: 0 0 10px rgba(51, 153, 255, 0.5); }
+
+.caja-instruccion-hacker { background: #050505; border: 1px solid #00ff33; padding: 15px; border-radius: 8px; box-shadow: inset 0 0 15px rgba(0, 255, 51, 0.1); }
+.texto-instruccion { font-size: 1.1rem; font-weight: bold; color: #fff; margin-bottom: 10px; }
+.barra-timer-contenedor { background: #222; height: 5px; width: 100%; }
+
+.panel-controles-hacker { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.modulo-hacker { background: #111; border: 1px solid #444; border-radius: 8px; padding: 15px 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; }
+.modulo-titulo { font-size: 0.8rem; color: #888; text-transform: uppercase; text-align: center; font-weight: bold; }
+
+.ctrl-boton { width: 70px; height: 70px; border-radius: 50%; background: #ff3333; border: 4px solid #aa0000; cursor: pointer; box-shadow: 0 5px 0 #660000; }
+.ctrl-boton:active { transform: translateY(5px); box-shadow: none; }
+
+/* PALANCA: Rojo por defecto (OFF), Verde al activarse (ON) */
+.ctrl-palanca { width: 60px; height: 90px; background: #222; border-radius: 30px; position: relative; border: 2px solid #555; cursor: pointer; }
+.ctrl-palanca-switch { width: 46px; height: 46px; background: #ff3333; border-radius: 50%; position: absolute; top: 5px; left: 5px; transition: top 0.2s, background-color 0.2s; box-shadow: 0 0 10px rgba(255, 51, 51, 0.3); }
+.ctrl-palanca.on .ctrl-palanca-switch { top: 35px; background: #00ff33; box-shadow: 0 0 10px rgba(0, 255, 51, 0.5); }
+
+.ctrl-teclado { display: flex; gap: 5px; }
+.ctrl-btn-num { width: 35px; height: 35px; background: #222; border: 1px solid #00ff33; color: #00ff33; font-weight: bold; display: flex; align-items: center; justify-content: center; cursor: pointer; border-radius: 4px; }
+.ctrl-btn-num.activo { background: #00ff33; color: #000; }
+
+.ctrl-flechas { display: grid; grid-template-columns: 35px 35px; gap: 5px; }
+.ctrl-flecha { background: #333; border: 1px solid #555; height: 35px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #fff; border-radius: 4px; }
+.ctrl-flecha:active { background: #00ff33; color: #000; }
+
+.ctrl-slider-container { width: 100%; display: flex; flex-direction: column; gap: 5px; }
+.ctrl-slider { width: 100%; accent-color: #00ff33; cursor: pointer; margin: 0; }
+.slider-labels { display: flex; justify-content: space-between; color: #888; font-size: 0.75rem; font-weight: bold; padding: 0 2px; }
+
+
+/* HUELLA DACTILAR (MANTENER APRETADO) */
+.ctrl-huella-container { display: flex; justify-content: center; align-items: center; width: 100%; }
+.ctrl-huella { width: 70px; height: 70px; border-radius: 15px; background: #222; border: 2px solid #00ff33; color: #00ff33; display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; overflow: hidden; user-select: none; -webkit-user-select: none; }
+.ctrl-huella .icono-huella { font-size: 3rem; position: relative; z-index: 2; transition: color 0.2s; }
+.huella-progreso { position: absolute; bottom: 0; left: 0; width: 100%; height: 0%; background: rgba(0, 255, 51, 0.4); transition: height 0.1s linear; z-index: 1; }
+.ctrl-huella:active { border-color: #fff; }
+.ctrl-huella:active .icono-huella { color: #fff; }
+
+/* DIAL METÁLICO GIRATORIO */
+.ctrl-dial-container { display: flex; flex-direction: column; align-items: center; cursor: pointer; gap: 5px; user-select: none; }
+.dial-metalico { width: 55px; height: 55px; background: radial-gradient(circle, #555 30%, #222 90%); border: 3px solid #00ff33; border-radius: 50%; position: relative; transition: transform 0.25s cubic-bezier(0.4, 2, 0.6, 1); box-shadow: 0 4px 8px rgba(0,0,0,0.5); }
+.dial-notch { width: 6px; height: 16px; background: #00ff33; position: absolute; top: 4px; left: calc(50% - 3px); border-radius: 3px; box-shadow: 0 0 5px #00ff33; }
+.dial-valor-texto { font-size: 0.75rem; color: #888; font-weight: bold; }
+.dial-num { color: #00ff33; }
